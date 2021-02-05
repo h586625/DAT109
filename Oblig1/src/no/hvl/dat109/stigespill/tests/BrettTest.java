@@ -17,7 +17,7 @@ class BrettTest
 
 	@BeforeEach
 	void setUp() throws Exception {
-		brett = new Brett();
+		brett = new Brett(10, 7);
 	}
 
 	@Test

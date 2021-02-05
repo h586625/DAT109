@@ -31,6 +31,13 @@ public class Brikke
 	}
 
 	/**
+	 * Flytt spillbrikke til startsrute på spillbrettet.
+	 */
+	public void flyttTilStart() {
+		rute = brett.flyttTilStart();
+	}
+
+	/**
 	 * @return the rute
 	 */
 	public Rute getRute() {

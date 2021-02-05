@@ -16,14 +16,16 @@ public class Stigespill
 	private Terning terning = new Terning();
 	private Brett brett;
 	private Integer antallSpillere = 2;
+	private int stiger = 10;
+	private int slanger = 7;
 	private boolean ferdig = false;
 
 	/**
-	 * Oppretter nytt stigespill.
+	 * Oppretter nytt stigespill med to spillere.
 	 */
 	public Stigespill() {
 		terning = new Terning();
-		brett = new Brett();
+		brett = new Brett(stiger, slanger);
 		// lager to spillere i tilfelle dette ikke blir gjort av brukeren
 		for (int i = 0; i < antallSpillere; i++) {
 			spillere.add(
@@ -39,7 +41,7 @@ public class Stigespill
 	 */
 	public Stigespill(int antallSpillere) {
 		terning = new Terning();
-		brett = new Brett();
+		brett = new Brett(stiger, slanger);
 		antallSpillere = this.antallSpillere;
 	}
 
@@ -50,6 +52,11 @@ public class Stigespill
 		int i = 0;
 		while (!ferdig) {
 			i++;
+			if (i == 1) {
+				brett.setFoersteRunde(true);
+			} else {
+				brett.setFoersteRunde(false);
+			}
 			System.out.println("Runde nr. " + i);
 			spillRunde();
 		}

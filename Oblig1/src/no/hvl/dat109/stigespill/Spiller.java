@@ -36,20 +36,50 @@ public class Spiller {
 
 	/**
 	 * Spiller et trekk med spilleren.
+	 *
+	 * @param terning
 	 */
 	public void spillTrekk(Terning terning) {
 		terning.trill();
 		Integer sum = terning.getVerdi();
 		int indeks = brett.getRuter().indexOf(brikke.getRute());
-		int nyIndeks = (indeks + sum);
 
+		brikke.flytt(sum);
+		vis(sum);
+
+		// en sekser = nytt kast
+		if (sum == 6) {
+			int antallSeksere = 3;
+			for (int i = 0; i < 2; i++) {
+				terning.trill();
+				sum = terning.getVerdi();
+
+				// tre seksere tar spilleren tilbake til start
+				if (antallSeksere == 3) {
+					brikke.flyttTilStart();
+					vis(sum);
+					break;
+				}
+
+				brikke.flytt(sum);
+				vis(sum);
+
+				if (sum == 6) {
+					// enda en sekser
+					antallSeksere++;
+				} else {
+					// ingen flere seksere
+					break;
+				}
+			}
+		}
+
+		// vinner
+		int nyIndeks = (indeks + sum);
 		if (nyIndeks == (100-1)) {
 			System.out.println("\nVi har en vinner:");
 			vinner = true;
 		}
-
-		brikke.flytt(sum);
-		vis(sum);
 	}
 
 	/**
@@ -78,6 +108,7 @@ public class Spiller {
 	}
 
 	/**
+	 * Returnerer en boolean basert på hvorvidt vi har en vinner.
 	 *
 	 * @return vinner
 	 */
