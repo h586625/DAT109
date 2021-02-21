@@ -2,12 +2,14 @@ package no.hvl.dat109.oblig2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import no.hvl.dat109.oblig2.helpers.Adresse;
 
 /**
  * Et bilutleie selskap.
- * 
+ *
  * @author Team 11
  *
  */
@@ -20,7 +22,7 @@ public class Selskap
 
     /**
      * Opprett nytt bilutleie selskap.
-     * 
+     *
      * @param navn
      * @param telefonnummer
      * @param adresse
@@ -56,6 +58,10 @@ public class Selskap
         this.adresse = adresse;
     }
 
+    public List<Kontor> getKontorer() {
+        return kontorer;
+    }
+
     public boolean leggTilKontor(Kontor kontor) {
         return kontorer.add(kontor);
     }
@@ -63,4 +69,16 @@ public class Selskap
     public boolean fjernKontor(Kontor kontor) {
         return kontorer.remove(kontor);
     }
+
+    public Kontor finnKontorPaaNummer(int nummer) {
+        List<Kontor> funn = kontorer.stream()
+            .filter(k -> nummer == k.getKontornr())
+            .collect(Collectors.toList());
+
+        if (funn.size() > 0) {
+            return funn.get(0);
+        }
+
+        return null;
+	}
 }

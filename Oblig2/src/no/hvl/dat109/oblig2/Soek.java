@@ -50,9 +50,28 @@ public class Soek
 	 */
 	public void visResultater()
 	{
-		for (Kategori kategori : sted.getLedigeKategorier(utleieDato, returDato)) {
-			System.out.println(kategori.getNavn());
-			System.out.println(kategori.getDagspris()*getAntallDager());
+		Integer id = 0;
+		Reservasjon reserver = new Reservasjon(utleieDato, returDato);
+
+		if (!sted.getLedigeBiler(utleieDato, returDato).isEmpty()) {
+			for (Utleiebil utleiebil : sted.getLedigeBiler(utleieDato, returDato))
+			{
+				id++;
+				reserver.put(id, utleiebil);
+
+				System.out.println("Nr. " + id);
+				System.out.println("Merke/modell:\t" + utleiebil.getMerke() + " " + utleiebil.getModell());
+				System.out.println("Farge:\t\t" + utleiebil.getFarge());
+				Kategori kategori = utleiebil.getKategori();
+				System.out.println("Kategori:\t" + kategori.getNavn());
+				System.out.println("Pris:\t\t" + kategori.getDagspris()*getAntallDager());
+				System.out.println();
+			}
+
+			System.out.println("\nVelg bil ved å skrive inn nummer");
+			reserver.kundeVelger();
+		} else {
+			System.out.println("Ingen biler er dessverre ledige i dette tidsrommet.");
 		}
 	}
 

@@ -45,24 +45,24 @@ public class Kontor
 	}
 
 	/**
-	 * Returner ledige bilkategorier.
+	 * Returner ledige biler.
 	 *
 	 * @param fra
 	 * @param til
-	 * @return kategorier
+	 * @return Utleiebil
 	 */
-	public Set<Kategori> getLedigeKategorier(LocalDate fra, LocalDate til)
+	public Set<Utleiebil> getLedigeBiler(LocalDate fra, LocalDate til)
 	{
-		Set<Kategori> kategorier = new HashSet<Kategori>();
+		Set<Utleiebil> ledigeBiler = new HashSet<Utleiebil>();
 
 		for (int i=0; i<biler.size(); i++) {
 			Utleiebil b = biler.get(i);
 			if (isBilLedig(b, fra, til)) {
-				kategorier.add(b.getKategori());
+				ledigeBiler.add(b);
 			}
 		}
 
-		return kategorier;
+		return ledigeBiler;
 	}
 
 	public int getKontornr() {
@@ -118,5 +118,10 @@ public class Kontor
 	public void leiUtBil(Utleiebil bil, LocalDate returDato) {
 		bil.setLedigFraDato(returDato);
 		biler.remove(bil);
+	}
+
+	@Override
+	public String toString() {
+		return "Kontornummer: " + kontornr;
 	}
 }

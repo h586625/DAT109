@@ -9,7 +9,7 @@ package no.hvl.dat109.oblig2.helpers;
 public class Kategori
 {
 	Kategorinavn navn;
-	double dagspris;
+	int dagspris;
 
 	/**
 	 * Oppretter en kategori med en bestemt dagspris.
@@ -57,11 +57,11 @@ public class Kategori
 		return navn;
 	}
 
-	public double getDagspris() {
+	public int getDagspris() {
 		return dagspris;
 	}
 
-	public void setDagspris(double dagspris) {
+	public void setDagspris(int dagspris) {
 		this.dagspris = dagspris;
 	}
 

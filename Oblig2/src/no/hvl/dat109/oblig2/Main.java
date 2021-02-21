@@ -13,6 +13,7 @@ public class Main
     {
         Selskap selskap = new Selskap("LeiMegDegHeiNeiOkei", "66666666", new Adresse("Jongsstubben 99", 1337, "Sandvika"));
         Kontor kontor = new Kontor(1, "99009900", new Adresse("Gate", 9900, "By"), 450);
+        Kontor kontor2 = new Kontor(2, "99999999", new Adresse("Malibu Point", 10880, "California"), 600);
         Utleiebil b = new Utleiebil(
             "EL12345", "Audi", "Etron", "Sølv", 15000, new Kategori(Kategorinavn.A),
             LocalDate.now(),
@@ -32,16 +33,27 @@ public class Main
         Kunde helene = new Kunde("Helene", "Solhaug", maanen, "+4799999999", "9988776655443322");
 
         selskap.leggTilKontor(kontor);
+        selskap.leggTilKontor(kontor2);
 
 		kontor.leggTilBil(b);
-		kontor.leggTilBil(b2);
+		kontor2.leggTilBil(b2);
 		kontor.leggTilBil(b3);
 
+        Meny meny = new Meny(selskap);
+        int valgtKontor = meny.getKontornummer();
+        LocalDate fraDato = meny.getUtleieDato();
+        LocalDate tilDato = meny.getReturDato();
+
+        System.out.println("Søket ditt:");
+        System.out.println("Utleiedato: " + fraDato);
+        System.out.println("Returdato: " + tilDato);
+        System.out.println(selskap.finnKontorPaaNummer(valgtKontor));
+
 		Soek soek = new Soek(
-            kontor,
-            LocalDate.now().plusDays(1),
+            selskap.finnKontorPaaNummer(valgtKontor),
+            fraDato,
             LocalTime.now(),
-            LocalDate.of(2023, 03, 15),
+            tilDato,
             LocalTime.now(),
             helene
         );

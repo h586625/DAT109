@@ -6,7 +6,7 @@ import no.hvl.dat109.oblig2.helpers.*;
 
 /**
  * En utleiebil.
- * 
+ *
  * @author Team 11
  *
  */
@@ -24,7 +24,7 @@ public class Utleiebil
 
 	/**
 	 * Oppretter en utleiebil.
-	 * 
+	 *
 	 * @param regnr
 	 * @param merke
 	 * @param modell
@@ -99,5 +99,11 @@ public class Utleiebil
 
 	public void setLedigTilDato(LocalDate ledigTilDato) {
 		this.ledigTilDato = ledigTilDato;
+	}
+
+	@Override
+	public String toString() {
+		return "Utleiebil \nRegnummer:\t" + regnr + "\nMerke:\t\t" + merke + "\nModell:\t\t" + modell + "\nFarge:\t\t" + farge
+				+ "\nKilometerstand:\t" + kilometerstand + "\nKategori:\t" + kategori.getNavn();
 	}
 }
