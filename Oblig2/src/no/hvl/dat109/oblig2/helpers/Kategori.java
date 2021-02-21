@@ -2,7 +2,7 @@ package no.hvl.dat109.oblig2.helpers;
 
 /**
  * En bilkategori.
- * 
+ *
  * @author Team 11
  *
  */
@@ -13,7 +13,7 @@ public class Kategori
 
 	/**
 	 * Oppretter en kategori med en bestemt dagspris.
-	 * 
+	 *
 	 * @param navn
 	 */
 	public Kategori(Kategorinavn navn) {
@@ -63,5 +63,18 @@ public class Kategori
 
 	public void setDagspris(double dagspris) {
 		this.dagspris = dagspris;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+
+		Kategori other = (Kategori) obj;
+		return navn.equals(other.navn);
 	}
 }

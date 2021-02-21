@@ -10,7 +10,7 @@ import no.hvl.dat109.oblig2.helpers.*;
 
 /**
  * Et kontor som leier ut biler.
- * 
+ *
  * @author Team 11
  *
  */
@@ -24,7 +24,7 @@ public class Kontor
 
 	/**
 	 * Oppretter et kontor.
-	 * 
+	 *
 	 * @param kontornr
 	 * @param tlfnr
 	 * @param adresse
@@ -39,9 +39,14 @@ public class Kontor
 		biler = new ArrayList<Utleiebil>();
 	}
 
+	public boolean isBilLedig(Utleiebil bil, LocalDate fra, LocalDate til) {
+		return (bil.getLedigFraDato().isBefore(fra) || bil.getLedigFraDato().equals(fra)) &&
+		(bil.getLedigTilDato().isAfter(til) || bil.getLedigTilDato().equals(til));
+	}
+
 	/**
 	 * Returner ledige bilkategorier.
-	 * 
+	 *
 	 * @param fra
 	 * @param til
 	 * @return kategorier
@@ -50,16 +55,10 @@ public class Kontor
 	{
 		Set<Kategori> kategorier = new HashSet<Kategori>();
 
-		for (Utleiebil b : biler) {
-			// if
-			if (
-				(b.getLedigFraDato().isBefore(fra) || b.getLedigFraDato().equals(fra)) &&
-				(b.getLedigTilDato().isAfter(til) || b.getLedigTilDato().equals(til))
-			) {
+		for (int i=0; i<biler.size(); i++) {
+			Utleiebil b = biler.get(i);
+			if (isBilLedig(b, fra, til)) {
 				kategorier.add(b.getKategori());
-				b.setLedig(true);
-			} else {
-				b.setLedig(false);
 			}
 		}
 
@@ -104,21 +103,20 @@ public class Kontor
 
 	/**
 	 * Legg til en bil.
-	 * 
+	 *
 	 * @param bil
 	 */
 	public void leggTilBil(Utleiebil bil) {
 		biler.add(bil);
-		bil.setLedig(true);
 	}
 
 	/**
 	 * Lei ut en bil.
-	 * 
+	 *
 	 * @param bil
 	 */
-	public void leiUtBil(Utleiebil bil) {
-		bil.setLedig(false);
+	public void leiUtBil(Utleiebil bil, LocalDate returDato) {
+		bil.setLedigFraDato(returDato);
 		biler.remove(bil);
 	}
 }

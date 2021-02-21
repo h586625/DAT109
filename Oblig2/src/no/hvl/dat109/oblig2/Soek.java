@@ -7,8 +7,8 @@ import java.time.temporal.ChronoUnit;
 import no.hvl.dat109.oblig2.helpers.Kategori;
 
 /**
- * Et søk over ledige kategorier av biler under gitte kriterier.
- * 
+ * Et sï¿½k over ledige kategorier av biler under gitte kriterier.
+ *
  * @author Team 11
  *
  */
@@ -22,8 +22,8 @@ public class Soek
 	Kunde kunde;
 
 	/**
-	 * Oppretter et bilsøk.
-	 * 
+	 * Oppretter et bilsï¿½k.
+	 *
 	 * @param sted
 	 * @param utleieDato
 	 * @param utleieKlokkeslett
@@ -46,7 +46,7 @@ public class Soek
     }
 
 	/**
-	 * Vis søkeresultater.
+	 * Vis sï¿½keresultater.
 	 */
 	public void visResultater()
 	{
